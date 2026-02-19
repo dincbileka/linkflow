@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Background rounded square -->
+  <rect width="48" height="48" rx="12" fill="#5B42F3"/>
+  <!-- Chain link icon: two overlapping rounded rectangles -->
+  <rect x="10" y="19" width="16" height="10" rx="5" fill="white"/>
+  <rect x="22" y="19" width="16" height="10" rx="5" fill="white"/>
+  <!-- Overlap mask to create link gap -->
+  <rect x="22" y="21" width="6" height="6" rx="1" fill="#5B42F3"/>
+  <!-- Lightning bolt accent -->
+  <path d="M27 13 L23 23 H28 L21 35 L25 23 H20 Z" fill="#00E599" stroke="none"/>
+</svg>

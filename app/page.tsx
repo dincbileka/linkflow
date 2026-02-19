@@ -6,233 +6,448 @@ export default function Home() {
   return (
     <div style={s.page}>
 
-      {/* ── Header ── */}
+      {/* ── HEADER ── */}
       <header style={s.header}>
-        <span style={s.logo}>LinkFlow</span>
+        <Link href="/" style={s.logo}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.svg" alt="" width={30} height={30} style={{ borderRadius: 7 }} />
+          <span>LinkFlow</span>
+        </Link>
         <nav style={s.nav}>
+          <Link href="#features" style={s.navLink}>Özellikler</Link>
+          <Link href="#how" style={s.navLink}>Nasıl Çalışır</Link>
           <Link href="/demo" style={s.navLink}>Demo</Link>
-          <Link href="/giris" style={s.navLink}>Blog</Link>
         </nav>
         <div style={s.navRight}>
-          <Link href="/giris" style={s.btnLogin}>Giriş Yap</Link>
-          <Link href="#" style={s.btnSignup}>Üye Ol</Link>
+          <Link href="/giris" style={s.navLogin}>Giriş Yap</Link>
+          <Link href="/kayit" style={s.navSignup}>Üye Ol — Ücretsiz</Link>
         </div>
       </header>
 
-      {/* ── Hero (colored) ── */}
+      {/* ── HERO ── */}
       <section style={s.hero}>
         <div style={s.heroLeft}>
+          <div style={s.heroBadge}>🚀 Türkiye&apos;nin #1 Creator Platformu</div>
+
           <h1 style={s.headline}>
-            Tek Bağlantı,<br />
-            Sonsuz Gelir.
+            Seni Takip Edenler<br />
+            <em style={s.headlineEm}>Müşteriye Dönüşsün.</em>
           </h1>
-          <p style={s.sub}>
-            Linklerini, ürünlerini ve içeriklerini tek sayfada topla.
-            Takipçilerini müşteriye dönüştür.
+
+          <p style={s.heroSub}>
+            Linklerini, dijital ürünlerini ve içeriklerini tek bir sayfada topla.
+            Takipçilerinden gelir elde etmeye bugün başla.
           </p>
-          <Link href="#" style={s.ctaBtn}>
-            Hemen Başla →
-          </Link>
-          <p style={s.ctaNote}>Kredi kartı gerekmez · Ücretsiz başla</p>
+
+          <div style={s.heroCtas}>
+            <Link href="/kayit" style={s.ctaPrimary}>
+              Mağazanı Ücretsiz Kur →
+            </Link>
+            <Link href="/demo" style={s.ctaGhost}>
+              Canlı Demo İncele
+            </Link>
+          </div>
+
+          <div style={s.heroStats}>
+            <div style={s.stat}><strong>10K+</strong><span>Aktif Kullanıcı</span></div>
+            <div style={s.statDiv} />
+            <div style={s.stat}><strong>₺2M+</strong><span>Toplam Gelir</span></div>
+            <div style={s.statDiv} />
+            <div style={s.stat}><strong>4.9★</strong><span>Puan</span></div>
+          </div>
         </div>
 
+        {/* Phone mockup */}
         <div style={s.heroRight}>
-          {/* Phone */}
-          <div style={s.phoneOuter}>
+          <div style={s.phoneWrap}>
             <div style={s.phone}>
-              <div style={s.phoneInner}>
-                {/* Header row */}
-                <div style={s.pHeader}>
+              <div style={s.phoneNotch} />
+              <div style={s.phoneScreen}>
+                {/* Profile row */}
+                <div style={s.pProfileRow}>
                   <div style={s.pAvatar} />
                   <div>
-                    <div style={s.pName} />
-                    <div style={s.pHandle} />
+                    <div style={s.pUsername}>Alexandra Silva</div>
+                    <div style={s.pBio}>Content Creator · 500K takipçi</div>
                   </div>
                 </div>
 
-                {/* Links */}
-                {['Instagram', 'YouTube', 'Podcast'].map((l) => (
-                  <div key={l} style={s.pLink}>
-                    <span style={s.pLinkIcon}>🔗</span>
-                    <span style={s.pLinkText}>{l}</span>
-                    <span style={s.pLinkArrow}>›</span>
-                  </div>
-                ))}
+                {/* Social icons row */}
+                <div style={s.pSocialRow}>
+                  {['📸', '🎬', '🎵', '💼', '🐦'].map((icon, i) => (
+                    <div key={i} style={s.pSocialIcon}>{icon}</div>
+                  ))}
+                </div>
 
-                <div style={s.pDivider} />
-
-                {/* Products */}
+                {/* Product cards */}
                 {[
-                  { emoji: '📘', name: 'E-Kitap', price: '₺149', tag: 'EN ÇOK SATAN' },
-                  { emoji: '🎬', name: 'Video Kurs', price: '₺499', tag: '' },
-                  { emoji: '📅', name: '1:1 Danışmanlık', price: '₺299', tag: '' },
+                  { emoji: '📘', name: 'İçerik Üretici Rehberi', price: '₺149', tag: 'EN ÇOK SATAN', tagColor: '#ef4444' },
+                  { emoji: '🎬', name: 'YouTube Master Kursu', price: '₺499', tag: '%50 İNDİRİM', tagColor: '#16a34a' },
+                  { emoji: '📅', name: '1:1 Danışmanlık', price: '₺299', tag: '', tagColor: '' },
                 ].map((p) => (
-                  <div key={p.name} style={s.pProduct}>
-                    <div style={s.pProductEmoji}>{p.emoji}</div>
-                    <div style={s.pProductInfo}>
-                      {p.tag && <span style={s.pProductTag}>{p.tag}</span>}
-                      <div style={s.pProductName}>{p.name}</div>
-                      <div style={s.pProductPrice}>{p.price}</div>
+                  <div key={p.name} style={s.pCard}>
+                    <span style={s.pCardEmoji}>{p.emoji}</span>
+                    <div style={s.pCardInfo}>
+                      {p.tag && (
+                        <span style={{ ...s.pCardTag, background: p.tagColor }}>{p.tag}</span>
+                      )}
+                      <div style={s.pCardName}>{p.name}</div>
+                      <div style={s.pCardPrice}>{p.price}</div>
                     </div>
-                    <div style={s.pProductArrow}>›</div>
+                    <div style={s.pCardBtn}>Al →</div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Floating mini cards */}
-            <div style={{ ...s.floatCard, top: '5%', right: '-80px' }}>
-              <span>🔗</span><span>12 tıklanma</span>
+            {/* Floating notifications */}
+            <div style={{ ...s.notif, top: '8%', right: '-90px' }}>
+              <span>�️</span>
+              <div>
+                <div style={s.notifTitle}>Yeni Satış!</div>
+                <div style={s.notifSub}>E-Kitap · ₺149</div>
+              </div>
             </div>
-            <div style={{ ...s.floatCard, top: '44%', left: '-88px' }}>
-              <span>📦</span><span>Yeni sipariş</span>
+            <div style={{ ...s.notif, top: '42%', left: '-110px' }}>
+              <span>❤️</span>
+              <div>
+                <div style={s.notifTitle}>Yeni Takipçi</div>
+                <div style={s.notifSub}>@kullanici123</div>
+              </div>
             </div>
-            <div style={{ ...s.floatCard, bottom: '10%', right: '-80px' }}>
-              <span>💰</span><span>₺499 gelir</span>
+            <div style={{ ...s.notif, bottom: '10%', right: '-94px' }}>
+              <span>💰</span>
+              <div>
+                <div style={s.notifTitle}>Bugünkü Gelir</div>
+                <div style={s.notifSub}>₺1.240</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Social proof strip ── */}
-      <section style={s.proof}>
-        <p style={s.proofText}>
-          <strong>En iyi içerik üreticiler LinkFlow kullanıyor</strong> 🚀
-          &nbsp;—&nbsp;Takipçilerini müşteriye dönüştür.
-        </p>
+      {/* ── HOW IT WORKS ── */}
+      <section style={s.howSection} id="how">
+        <p style={s.sectionEyebrow}>Nasıl Çalışır?</p>
+        <h2 style={s.sectionTitle}>3 Adımda Mağazanı Kur</h2>
+        <div style={s.steps}>
+          {[
+            { n: '01', title: 'Üye Ol', desc: 'Dakikalar içinde profilini oluştur. Kredi kartı gerekmez.' },
+            { n: '02', title: 'İçeriklerini Ekle', desc: 'Linklerini, ürünlerini ve dijital içeriklerini yükle.' },
+            { n: '03', title: 'Paylaş & Kazan', desc: 'Tek linki biyografine ekle ve gelir etmeye başla.' },
+          ].map((step) => (
+            <div key={step.n} style={s.step}>
+              <div style={s.stepNum}>{step.n}</div>
+              <h3 style={s.stepTitle}>{step.title}</h3>
+              <p style={s.stepDesc}>{step.desc}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
+      {/* ── FEATURES ── */}
+      <section style={s.featSection} id="features">
+        <p style={s.sectionEyebrow}>Özellikler</p>
+        <h2 style={s.sectionTitle}>Her Şey Dahil</h2>
+        <div style={s.featGrid}>
+          {[
+            { icon: '🔗', title: 'Sınırsız Link', desc: 'Sosyal medya, web sitesi, podcast — istediğin kadar link.' },
+            { icon: '🛍️', title: 'Dijital Mağaza', desc: 'E-kitap, kurs, danışmanlık — hepsini tek yerden sat.' },
+            { icon: '📊', title: 'Detaylı Analitik', desc: 'Kim tıkladı, nereden geldi, ne sattı — hepsini gör.' },
+            { icon: '⚡', title: 'Ultra Hızlı', desc: 'Cloudflare Edge altyapısı ile küresel olarak hızlı.' },
+            { icon: '💳', title: 'Kolay Ödeme', desc: 'Kredi kartı, havale — müşteriler kolayca ödeme yapsın.' },
+            { icon: '🎨', title: 'Özelleştirilebilir', desc: 'Renk, font, düzen — sayfanı istediğin gibi tasarla.' },
+          ].map((f) => (
+            <div key={f.title} style={s.featCard}>
+              <div style={s.featIcon}>{f.icon}</div>
+              <h3 style={s.featTitle}>{f.title}</h3>
+              <p style={s.featDesc}>{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── CTA BANNER ── */}
+      <section style={s.ctaBanner}>
+        <h2 style={s.ctaBannerTitle}>Takipçilerini Müşteriye Dönüştür</h2>
+        <p style={s.ctaBannerSub}>Bugün üye ol, mağazanı dakikalar içinde kur.</p>
+        <Link href="/kayit" style={s.ctaBannerBtn}>
+          Ücretsiz Başla →
+        </Link>
+      </section>
+
+      {/* ── FOOTER ── */}
+      <footer style={s.footer}>
+        <span style={s.footerLogo}>⚡ LinkFlow</span>
+        <div style={s.footerLinks}>
+          <Link href="/gizlilik" style={s.footerLink}>Gizlilik</Link>
+          <Link href="/kullanim" style={s.footerLink}>Kullanım Şartları</Link>
+          <Link href="/iletisim" style={s.footerLink}>İletişim</Link>
+        </div>
+        <span style={s.footerCopy}>© 2026 LinkFlow</span>
+      </footer>
+
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; }
-
         @keyframes floatPhone {
-          0%, 100% { transform: translateY(0) rotate(-2deg); }
-          50%       { transform: translateY(-12px) rotate(-2deg); }
+          0%,100% { transform: translateY(0) rotate(-1.5deg); }
+          50%      { transform: translateY(-14px) rotate(-1.5deg); }
         }
-        .phone-anim { animation: floatPhone 5s ease-in-out infinite; }
+        .phone-float { animation: floatPhone 5s ease-in-out infinite; }
+        a:hover { opacity: 0.85; }
+        #features, #how { scroll-margin-top: 70px; }
       `}</style>
     </div>
   );
 }
 
-const PURPLE = '#5B42F3';
+// ── Theme ─────────────────────────────────────────────────────
+const PRIMARY = '#6B2D6B';        // koyu mor
+const PRIMARY_DARK = '#4A1F4A';
+const WHITE = '#fff';
+const DARK = '#0f0f0f';
+const GRAY = '#6b7280';
+const LIGHT_BG = '#fafafa';
+const BORDER = '#f0f0f0';
 
 const s: Record<string, React.CSSProperties> = {
-  page: { minHeight: '100vh', fontFamily: 'Inter, sans-serif', background: '#fff' },
+  page: { fontFamily: 'Inter, sans-serif', background: WHITE, color: DARK },
 
-  // Header
+  // ── Header
   header: {
-    position: 'absolute', top: 0, left: 0, right: 0, zIndex: 20,
-    display: 'flex', alignItems: 'center', gap: 32,
-    padding: '18px 48px',
+    position: 'sticky', top: 0, zIndex: 50,
+    display: 'flex', alignItems: 'center', gap: 24,
+    padding: '14px 48px',
+    background: 'rgba(255,255,255,0.9)',
+    borderBottom: `1px solid ${BORDER}`,
+    backdropFilter: 'blur(12px)',
   },
-  logo: { fontSize: 18, fontWeight: 800, color: '#fff', letterSpacing: '-0.5px', marginRight: 8 },
-  nav: { display: 'flex', gap: 4, flex: 1 },
-  navLink: { padding: '7px 14px', fontSize: 14, fontWeight: 500, color: 'rgba(255,255,255,0.75)', textDecoration: 'none', borderRadius: 8 },
+  logo: {
+    display: 'flex', alignItems: 'center', gap: 10,
+    fontSize: 18, fontWeight: 800, color: DARK,
+    textDecoration: 'none', letterSpacing: '-0.4px',
+  },
+  nav: { display: 'flex', gap: 2, flex: 1 },
+  navLink: {
+    padding: '7px 14px', fontSize: 14, fontWeight: 500,
+    color: GRAY, textDecoration: 'none', borderRadius: 8,
+  },
   navRight: { display: 'flex', gap: 8, alignItems: 'center' },
-  btnLogin: { padding: '8px 18px', fontSize: 14, fontWeight: 500, color: '#fff', textDecoration: 'none', borderRadius: 8 },
-  btnSignup: {
-    padding: '8px 20px', fontSize: 14, fontWeight: 600,
-    color: PURPLE, textDecoration: 'none', borderRadius: 8,
-    background: '#fff',
+  navLogin: {
+    padding: '8px 16px', fontSize: 14, fontWeight: 500,
+    color: DARK, textDecoration: 'none',
+  },
+  navSignup: {
+    padding: '9px 20px', fontSize: 14, fontWeight: 600,
+    color: WHITE, textDecoration: 'none', borderRadius: 8,
+    background: PRIMARY,
   },
 
-  // Hero
+  // ── Hero
   hero: {
-    background: PURPLE,
-    minHeight: '90vh',
+    background: PRIMARY,
     display: 'flex', alignItems: 'center', justifyContent: 'center',
     flexWrap: 'wrap', gap: 48,
-    padding: '110px 64px 80px',
+    padding: '72px 64px 64px',
+    minHeight: '88vh',
     position: 'relative', overflow: 'hidden',
   },
-  heroLeft: { flex: '1 1 360px', maxWidth: 480, color: '#fff' },
+  heroLeft: { flex: '1 1 380px', maxWidth: 520, color: WHITE },
+  heroBadge: {
+    display: 'inline-block',
+    padding: '6px 14px', borderRadius: 50,
+    background: 'rgba(255,255,255,0.15)',
+    fontSize: 13, fontWeight: 600, marginBottom: 22,
+  },
   headline: {
-    fontSize: 'clamp(40px, 5.5vw, 68px)',
-    fontWeight: 900, lineHeight: 1.08,
+    fontSize: 'clamp(38px, 5vw, 66px)',
+    fontWeight: 900, lineHeight: 1.07,
     letterSpacing: '-2.5px', marginBottom: 20,
   },
-  sub: {
-    fontSize: 17, lineHeight: 1.65,
-    color: 'rgba(255,255,255,0.75)', marginBottom: 36, maxWidth: 380,
+  headlineEm: {
+    fontStyle: 'italic',
+    textDecoration: 'underline',
+    textDecorationColor: 'rgba(255,255,255,0.4)',
+    textDecorationThickness: '3px',
+    textUnderlineOffset: '6px',
   },
-  ctaBtn: {
-    display: 'inline-block',
-    padding: '15px 30px', borderRadius: 50,
-    background: '#00E599', color: '#0f0f0f',
-    fontWeight: 700, fontSize: 16, textDecoration: 'none',
-    boxShadow: '0 4px 20px rgba(0,229,153,0.4)',
+  heroSub: {
+    fontSize: 16, lineHeight: 1.7,
+    color: 'rgba(255,255,255,0.75)',
+    maxWidth: 420, marginBottom: 36,
   },
-  ctaNote: { marginTop: 12, fontSize: 13, color: 'rgba(255,255,255,0.5)' },
+  heroCtas: { display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center', marginBottom: 36 },
+  ctaPrimary: {
+    display: 'inline-flex', alignItems: 'center',
+    padding: '14px 26px', borderRadius: 50,
+    background: WHITE, color: PRIMARY,
+    fontWeight: 700, fontSize: 15, textDecoration: 'none',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+  },
+  ctaGhost: {
+    display: 'inline-flex', alignItems: 'center',
+    padding: '14px 22px', borderRadius: 50,
+    border: '2px solid rgba(255,255,255,0.4)',
+    color: WHITE, fontWeight: 600, fontSize: 15, textDecoration: 'none',
+  },
+  heroStats: { display: 'flex', alignItems: 'center', gap: 20 },
+  stat: {
+    display: 'flex', flexDirection: 'column', gap: 2,
+    fontSize: 13, color: 'rgba(255,255,255,0.7)',
+  },
+  statDiv: { width: 1, height: 32, background: 'rgba(255,255,255,0.25)' },
 
-  // Hero phone side
+  // ── Phone
   heroRight: {
     flex: '1 1 280px', display: 'flex',
     justifyContent: 'center', alignItems: 'center',
-    position: 'relative', minHeight: 500,
+    position: 'relative', minHeight: 540,
   },
-  phoneOuter: { position: 'relative', animation: 'floatPhone 5s ease-in-out infinite' },
+  phoneWrap: {
+    position: 'relative',
+    animation: 'floatPhone 5s ease-in-out infinite',
+  },
   phone: {
-    width: 260, borderRadius: 28,
-    background: '#f5f3ff',
-    boxShadow: '0 32px 80px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.15)',
+    width: 270, borderRadius: 32,
+    background: '#fff',
+    boxShadow: '0 40px 100px rgba(0,0,0,0.35), 0 0 0 1.5px rgba(255,255,255,0.3)',
     overflow: 'hidden',
-    transform: 'rotate(-2deg)',
+    transform: 'rotate(-1.5deg)',
   },
-  phoneInner: { padding: '20px 14px', display: 'flex', flexDirection: 'column', gap: 8 },
+  phoneNotch: {
+    width: 90, height: 22, borderRadius: 11,
+    background: '#f3f4f6', margin: '12px auto 0',
+  },
+  phoneScreen: {
+    padding: '14px 14px 20px',
+    display: 'flex', flexDirection: 'column', gap: 8,
+  },
 
-  pHeader: { display: 'flex', alignItems: 'center', gap: 10, marginBottom: 6 },
+  pProfileRow: { display: 'flex', alignItems: 'center', gap: 10 },
   pAvatar: {
-    width: 44, height: 44, borderRadius: '50%', flexShrink: 0,
-    background: 'linear-gradient(135deg, #7c3aed, #db2777)',
+    width: 46, height: 46, borderRadius: '50%', flexShrink: 0,
+    background: `linear-gradient(135deg, ${PRIMARY}, #c026d3)`,
   },
-  pName: { width: 90, height: 8, borderRadius: 4, background: '#ddd6fe', marginBottom: 4 },
-  pHandle: { width: 60, height: 6, borderRadius: 4, background: '#ede9fe' },
+  pUsername: { fontSize: 13, fontWeight: 700, color: DARK },
+  pBio: { fontSize: 10, color: GRAY, marginTop: 2 },
 
-  pLink: {
-    display: 'flex', alignItems: 'center', gap: 8,
-    padding: '10px 12px', borderRadius: 10,
-    background: '#fff', border: '1px solid #e9d5ff',
+  pSocialRow: { display: 'flex', gap: 6, justifyContent: 'center', margin: '4px 0' },
+  pSocialIcon: {
+    width: 30, height: 30, borderRadius: '50%',
+    background: '#f3f4f6', display: 'flex', alignItems: 'center',
+    justifyContent: 'center', fontSize: 13,
   },
-  pLinkIcon: { fontSize: 13 },
-  pLinkText: { flex: 1, fontSize: 12, fontWeight: 600, color: '#1f1f2e' },
-  pLinkArrow: { fontSize: 16, color: '#c4b5fd' },
 
-  pDivider: { height: 1, background: '#e9d5ff', margin: '2px 0' },
-
-  pProduct: {
+  pCard: {
     display: 'flex', alignItems: 'center', gap: 10,
-    padding: '10px 12px', borderRadius: 10,
-    background: '#fff', border: '1px solid #e9d5ff',
+    padding: '10px 12px', borderRadius: 12,
+    border: '1.5px solid #f0f0f0', background: '#fff',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
   },
-  pProductEmoji: { fontSize: 22, flexShrink: 0 },
-  pProductInfo: { flex: 1, display: 'flex', flexDirection: 'column', gap: 2 },
-  pProductTag: {
-    fontSize: 8, fontWeight: 700, letterSpacing: '0.06em',
-    color: '#7c3aed', background: '#ede9fe',
-    padding: '1px 6px', borderRadius: 4, alignSelf: 'flex-start',
+  pCardEmoji: { fontSize: 22, flexShrink: 0 },
+  pCardInfo: { flex: 1, display: 'flex', flexDirection: 'column', gap: 2 },
+  pCardTag: {
+    fontSize: 8, fontWeight: 700, letterSpacing: '0.05em',
+    color: WHITE, padding: '2px 6px', borderRadius: 4,
+    alignSelf: 'flex-start',
   },
-  pProductName: { fontSize: 12, fontWeight: 600, color: '#1f1f2e' },
-  pProductPrice: { fontSize: 12, fontWeight: 700, color: '#7c3aed' },
-  pProductArrow: { fontSize: 18, color: '#c4b5fd' },
+  pCardName: { fontSize: 11, fontWeight: 700, color: DARK },
+  pCardPrice: { fontSize: 11, fontWeight: 700, color: PRIMARY },
+  pCardBtn: {
+    fontSize: 11, fontWeight: 700, color: WHITE,
+    background: PRIMARY, padding: '5px 10px', borderRadius: 8,
+    flexShrink: 0,
+  },
 
-  // Float cards
-  floatCard: {
+  notif: {
     position: 'absolute',
-    display: 'flex', alignItems: 'center', gap: 8,
-    padding: '9px 14px', borderRadius: 10,
-    background: '#fff', boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
-    fontSize: 12, fontWeight: 600, color: '#1f1f2e',
-    whiteSpace: 'nowrap',
+    display: 'flex', alignItems: 'center', gap: 10,
+    padding: '10px 14px', borderRadius: 12, fontSize: 16,
+    background: WHITE, boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
+    border: `1px solid ${BORDER}`, whiteSpace: 'nowrap',
   },
+  notifTitle: { fontSize: 12, fontWeight: 700, color: DARK },
+  notifSub: { fontSize: 11, color: GRAY, marginTop: 1 },
 
-  // Social proof
-  proof: {
-    background: '#fff', padding: '28px 48px',
-    borderTop: '1px solid #f0f0f0',
+  // ── How it works
+  howSection: {
+    padding: '80px 48px',
+    background: LIGHT_BG,
     textAlign: 'center',
   },
-  proofText: { fontSize: 15, color: '#6b7280' },
+  steps: {
+    display: 'flex', gap: 32, flexWrap: 'wrap',
+    justifyContent: 'center', marginTop: 48,
+  },
+  step: { flex: '1 1 220px', maxWidth: 300 },
+  stepNum: {
+    fontSize: 48, fontWeight: 900, color: PRIMARY,
+    opacity: 0.15, lineHeight: 1, marginBottom: 12,
+  },
+  stepTitle: { fontSize: 18, fontWeight: 700, marginBottom: 8, color: DARK },
+  stepDesc: { fontSize: 14, lineHeight: 1.65, color: GRAY },
+
+  // ── Features
+  featSection: {
+    padding: '80px 48px',
+    maxWidth: 1080, margin: '0 auto',
+    textAlign: 'center',
+  },
+  featGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: 20, marginTop: 48, textAlign: 'left',
+  },
+  featCard: {
+    padding: '28px 24px', borderRadius: 16,
+    border: `1px solid ${BORDER}`, background: WHITE,
+  },
+  featIcon: { fontSize: 28, marginBottom: 14 },
+  featTitle: { fontSize: 16, fontWeight: 700, marginBottom: 8, color: DARK },
+  featDesc: { fontSize: 13, lineHeight: 1.65, color: GRAY },
+
+  // Section common
+  sectionEyebrow: {
+    fontSize: 13, fontWeight: 600, letterSpacing: '0.08em',
+    color: PRIMARY, textTransform: 'uppercase', marginBottom: 12,
+  },
+  sectionTitle: {
+    fontSize: 'clamp(28px, 4vw, 42px)',
+    fontWeight: 800, letterSpacing: '-1px', color: DARK,
+  },
+
+  // ── CTA Banner
+  ctaBanner: {
+    background: PRIMARY,
+    padding: '72px 48px',
+    textAlign: 'center',
+    color: WHITE,
+  },
+  ctaBannerTitle: {
+    fontSize: 'clamp(28px, 4vw, 44px)',
+    fontWeight: 900, letterSpacing: '-1.5px', marginBottom: 14,
+  },
+  ctaBannerSub: { fontSize: 16, color: 'rgba(255,255,255,0.7)', marginBottom: 32 },
+  ctaBannerBtn: {
+    display: 'inline-block',
+    padding: '15px 32px', borderRadius: 50,
+    background: WHITE, color: PRIMARY,
+    fontWeight: 700, fontSize: 16, textDecoration: 'none',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+  },
+
+  // ── Footer
+  footer: {
+    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+    flexWrap: 'wrap', gap: 12,
+    padding: '20px 48px',
+    borderTop: `1px solid ${BORDER}`,
+    background: WHITE,
+  },
+  footerLogo: { fontSize: 15, fontWeight: 700, color: DARK },
+  footerLinks: { display: 'flex', gap: 24 },
+  footerLink: { fontSize: 13, color: GRAY, textDecoration: 'none' },
+  footerCopy: { fontSize: 13, color: GRAY },
 };
