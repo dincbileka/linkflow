@@ -97,34 +97,6 @@ export default function Page() {
           padding: '60px 0 0',
           position: 'relative',
         }}>
-          {/* Floating sale badge — sol üst */}
-          <div style={{
-            position: 'absolute', top: '18%', left: '6%',
-            background: WHITE, borderRadius: 16,
-            padding: '12px 16px',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
-            display: 'flex', flexDirection: 'column', gap: 2,
-            minWidth: 130,
-          }}>
-            <span style={{ fontSize: 11, fontWeight: 700, color: GRAY, letterSpacing: '0.04em' }}>YENİ SATIŞ 🛍️</span>
-            <span style={{ fontSize: 18, fontWeight: 900, color: DARK }}>+₺149</span>
-          </div>
-
-          {/* Floating follower badge — sağ */}
-          <div style={{
-            position: 'absolute', top: '35%', right: '4%',
-            background: WHITE, borderRadius: 14,
-            padding: '10px 14px',
-            boxShadow: '0 8px 28px rgba(0,0,0,0.15)',
-            display: 'flex', alignItems: 'center', gap: 10,
-          }}>
-            <div style={{ width: 36, height: 36, borderRadius: '50%', background: `linear-gradient(135deg,${BRAND},#c026d3)`, flexShrink: 0 }} />
-            <div>
-              <div style={{ fontSize: 11, fontWeight: 700, color: DARK }}>Yeni Takipçi</div>
-              <div style={{ fontSize: 11, color: GRAY }}>@kullanici41</div>
-            </div>
-          </div>
-
           {/* TELEFON */}
           <div style={{
             width: 310, borderRadius: '40px 40px 0 0',
