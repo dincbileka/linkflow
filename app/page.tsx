@@ -1,453 +1,322 @@
 export const runtime = 'edge';
-
 import Link from 'next/link';
 
-export default function Home() {
-  return (
-    <div style={s.page}>
+// ── THEME ──────────────────────────────────────────────────────
+const BRAND = '#6B2D6B';
+const GREEN = '#00D084';   // Stan'in yeşil CTA rengi — bizde accent
+const WHITE = '#ffffff';
+const DARK = '#0a0a0a';
+const GRAY = '#64748b';
+const BORDER = '#e2e8f0';
 
-      {/* ── HEADER ── */}
-      <header style={s.header}>
-        <Link href="/" style={s.logo}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="" width={30} height={30} style={{ borderRadius: 7 }} />
-          <span>LinkFlow</span>
-        </Link>
-        <nav style={s.nav}>
-          <Link href="#features" style={s.navLink}>Özellikler</Link>
-          <Link href="#how" style={s.navLink}>Nasıl Çalışır</Link>
-          <Link href="/demo" style={s.navLink}>Demo</Link>
+export default function Page() {
+  return (
+    <div style={{ fontFamily: "'Plus Jakarta Sans', Inter, sans-serif", background: WHITE, color: DARK }}>
+
+      {/* ══════════════════════════════════════════════
+          HEADER
+      ══════════════════════════════════════════════ */}
+      <header style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200,
+        height: 64,
+        display: 'flex', alignItems: 'center',
+        padding: '0 40px',
+        background: BRAND,
+      }}>
+        {/* Logo */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
+          <span style={{ fontSize: 20, fontWeight: 900, color: WHITE, letterSpacing: '-0.6px' }}>LinkFlow</span>
+        </div>
+
+        {/* Nav links — centre */}
+        <nav style={{ display: 'flex', gap: 2 }}>
+          {[['Özellikler', '#features'], ['Nasıl Çalışır', '#how'], ['Fiyatlandırma', '#pricing'], ['Blog', '/blog']].map(([l, h]) => (
+            <a key={l} href={h} style={{ padding: '8px 14px', fontSize: 14, fontWeight: 500, color: 'rgba(255,255,255,0.78)', textDecoration: 'none', borderRadius: 8 }}>{l}</a>
+          ))}
         </nav>
-        <div style={s.navRight}>
-          <Link href="/giris" style={s.navLogin}>Giriş Yap</Link>
-          <Link href="/kayit" style={s.navSignup}>Üye Ol — Ücretsiz</Link>
+
+        {/* Right actions */}
+        <div style={{ display: 'flex', gap: 10, alignItems: 'center', flex: 1, justifyContent: 'flex-end' }}>
+          <Link href="/giris" style={{ fontSize: 14, fontWeight: 500, color: WHITE, textDecoration: 'none', padding: '8px 14px' }}>Giriş Yap</Link>
+          <Link href="/kayit" style={{ fontSize: 14, fontWeight: 700, color: BRAND, background: WHITE, textDecoration: 'none', padding: '10px 22px', borderRadius: 50 }}>
+            Üye Ol
+          </Link>
         </div>
       </header>
 
-      {/* ── HERO ── */}
-      <section style={s.hero}>
-        <div style={s.heroLeft}>
-          <div style={s.heroBadge}>🚀 Türkiye&apos;nin #1 Creator Platformu</div>
-
-          <h1 style={s.headline}>
-            Seni Takip Edenler<br />
-            <em style={s.headlineEm}>Müşteriye Dönüşsün.</em>
+      {/* ══════════════════════════════════════════════
+          HERO  (tam Stan tarzı — sol metin, sağ telefon)
+      ══════════════════════════════════════════════ */}
+      <section style={{
+        background: BRAND, minHeight: '100vh',
+        paddingTop: 64,                     /* header height */
+        display: 'flex', alignItems: 'stretch',
+        overflow: 'hidden',
+        position: 'relative',
+      }}>
+        {/* ── Sol sütun ── */}
+        <div style={{
+          flex: '0 0 50%', maxWidth: 620,
+          display: 'flex', flexDirection: 'column', justifyContent: 'center',
+          padding: '80px 48px 80px 72px',
+          color: WHITE,
+        }}>
+          <h1 style={{
+            fontSize: 'clamp(42px, 5.5vw, 72px)',
+            fontWeight: 900, lineHeight: 1.04,
+            letterSpacing: '-2.5px', marginBottom: 20,
+          }}>
+            Herkese Açık<br />Bir Creator<br />Mağazası Kur.
           </h1>
 
-          <p style={s.heroSub}>
-            Linklerini, dijital ürünlerini ve içeriklerini tek bir sayfada topla.
-            Takipçilerinden gelir elde etmeye bugün başla.
+          <p style={{ fontSize: 18, lineHeight: 1.65, color: 'rgba(255,255,255,0.74)', maxWidth: 400, marginBottom: 36 }}>
+            Tüm kurslarını, dijital ürünlerini ve randevularını tek bir link altında topla.
           </p>
 
-          <div style={s.heroCtas}>
-            <Link href="/kayit" style={s.ctaPrimary}>
-              Mağazanı Ücretsiz Kur →
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            <Link href="/kayit" style={{
+              display: 'inline-flex', alignItems: 'center',
+              padding: '18px 36px', borderRadius: 50,
+              background: GREEN, color: DARK,
+              fontWeight: 800, fontSize: 17, textDecoration: 'none',
+              boxShadow: '0 6px 28px rgba(0,208,132,0.4)',
+              alignSelf: 'flex-start',
+            }}>
+              Devam Et →
             </Link>
-            <Link href="/demo" style={s.ctaGhost}>
-              Canlı Demo İncele
-            </Link>
-          </div>
-
-          <div style={s.heroStats}>
-            <div style={s.stat}><strong>10K+</strong><span>Aktif Kullanıcı</span></div>
-            <div style={s.statDiv} />
-            <div style={s.stat}><strong>₺2M+</strong><span>Toplam Gelir</span></div>
-            <div style={s.statDiv} />
-            <div style={s.stat}><strong>4.9★</strong><span>Puan</span></div>
+            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.44)' }}>
+              Kredi kartı gerekmez · 2 dakikada kurulum · Ücretsiz başla
+            </p>
           </div>
         </div>
 
-        {/* Phone mockup */}
-        <div style={s.heroRight}>
-          <div style={s.phoneWrap}>
-            <div style={s.phone}>
-              <div style={s.phoneNotch} />
-              <div style={s.phoneScreen}>
-                {/* Profile row */}
-                <div style={s.pProfileRow}>
-                  <div style={s.pAvatar} />
-                  <div>
-                    <div style={s.pUsername}>Alexandra Silva</div>
-                    <div style={s.pBio}>Content Creator · 500K takipçi</div>
-                  </div>
-                </div>
+        {/* ── Sağ sütun — telefon + floating badge'ler ── */}
+        <div style={{
+          flex: 1,
+          display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
+          padding: '60px 0 0',
+          position: 'relative',
+        }}>
+          {/* Floating sale badge — sol üst */}
+          <div style={{
+            position: 'absolute', top: '18%', left: '6%',
+            background: WHITE, borderRadius: 16,
+            padding: '12px 16px',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
+            display: 'flex', flexDirection: 'column', gap: 2,
+            minWidth: 130,
+          }}>
+            <span style={{ fontSize: 11, fontWeight: 700, color: GRAY, letterSpacing: '0.04em' }}>YENİ SATIŞ 🛍️</span>
+            <span style={{ fontSize: 18, fontWeight: 900, color: DARK }}>+₺149</span>
+          </div>
 
-                {/* Social icons row */}
-                <div style={s.pSocialRow}>
-                  {['📸', '🎬', '🎵', '💼', '🐦'].map((icon, i) => (
-                    <div key={i} style={s.pSocialIcon}>{icon}</div>
+          {/* Floating follower badge — sağ */}
+          <div style={{
+            position: 'absolute', top: '35%', right: '4%',
+            background: WHITE, borderRadius: 14,
+            padding: '10px 14px',
+            boxShadow: '0 8px 28px rgba(0,0,0,0.15)',
+            display: 'flex', alignItems: 'center', gap: 10,
+          }}>
+            <div style={{ width: 36, height: 36, borderRadius: '50%', background: `linear-gradient(135deg,${BRAND},#c026d3)`, flexShrink: 0 }} />
+            <div>
+              <div style={{ fontSize: 11, fontWeight: 700, color: DARK }}>Yeni Takipçi</div>
+              <div style={{ fontSize: 11, color: GRAY }}>@kullanici41</div>
+            </div>
+          </div>
+
+          {/* TELEFON */}
+          <div style={{
+            width: 310, borderRadius: '40px 40px 0 0',
+            background: '#f8f5ff',
+            boxShadow: '0 -24px 80px rgba(0,0,0,0.28)',
+            border: '2px solid rgba(255,255,255,0.25)',
+            borderBottom: 'none',
+            overflow: 'hidden',
+          }}>
+            {/* notch */}
+            <div style={{ height: 34, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8f5ff' }}>
+              <div style={{ width: 90, height: 10, borderRadius: 8, background: '#e2d9f3' }} />
+            </div>
+
+            {/* Profile content */}
+            <div style={{ padding: '16px 18px 32px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {/* avatar + name */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, paddingBottom: 8 }}>
+                <div style={{ width: 64, height: 64, borderRadius: '50%', background: `linear-gradient(135deg,${BRAND},#c026d3)`, boxShadow: `0 0 0 4px rgba(107,45,107,0.2)` }} />
+                <div>
+                  <div style={{ fontWeight: 800, fontSize: 15, color: DARK, textAlign: 'center' }}>Alexandra Silva</div>
+                  <div style={{ fontSize: 12, color: GRAY, textAlign: 'center', marginTop: 2 }}>Content Creator</div>
+                </div>
+                {/* social icons */}
+                <div style={{ display: 'flex', gap: 8 }}>
+                  {['📸', '🎬', '🎵', '💼', '🐦'].map(i => (
+                    <div key={i} style={{ width: 32, height: 32, background: 'rgba(107,45,107,0.1)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>{i}</div>
                   ))}
                 </div>
+              </div>
 
-                {/* Product cards */}
-                {[
-                  { emoji: '📘', name: 'İçerik Üretici Rehberi', price: '₺149', tag: 'EN ÇOK SATAN', tagColor: '#ef4444' },
-                  { emoji: '🎬', name: 'YouTube Master Kursu', price: '₺499', tag: '%50 İNDİRİM', tagColor: '#16a34a' },
-                  { emoji: '📅', name: '1:1 Danışmanlık', price: '₺299', tag: '', tagColor: '' },
-                ].map((p) => (
-                  <div key={p.name} style={s.pCard}>
-                    <span style={s.pCardEmoji}>{p.emoji}</span>
-                    <div style={s.pCardInfo}>
-                      {p.tag && (
-                        <span style={{ ...s.pCardTag, background: p.tagColor }}>{p.tag}</span>
-                      )}
-                      <div style={s.pCardName}>{p.name}</div>
-                      <div style={s.pCardPrice}>{p.price}</div>
-                    </div>
-                    <div style={s.pCardBtn}>Al →</div>
+              {/* Products */}
+              <div style={{ fontWeight: 700, fontSize: 10, letterSpacing: '0.08em', color: GRAY }}>ÜRÜNLER</div>
+              {[
+                { e: '📘', n: 'Creator Kursim', p: '₺299', sub: 'Her şeyi öğren', hot: true },
+                { e: '📅', n: '1:1 Danışmanlık', p: '₺99', sub: '30 dk seans' },
+                { e: '⬇️', n: 'Rehber İndir', p: '₺49', sub: 'PDF içerik' },
+              ].map(({ e, n, p, sub, hot }) => (
+                <div key={n} style={{ background: WHITE, borderRadius: 14, padding: '12px 14px', display: 'flex', alignItems: 'center', gap: 12, boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+                  <div style={{ width: 44, height: 44, borderRadius: 10, background: BRAND, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, flexShrink: 0 }}>{e}</div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    {hot && <span style={{ fontSize: 8, fontWeight: 700, background: '#fef3c7', color: '#92400e', padding: '1px 5px', borderRadius: 4, display: 'inline-block', marginBottom: 2 }}>EN ÇOK SATAN ⭐</span>}
+                    <div style={{ fontWeight: 700, fontSize: 13, color: DARK, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{n}</div>
+                    <div style={{ fontSize: 11, color: GRAY }}>{sub}</div>
                   </div>
-                ))}
-              </div>
-            </div>
+                  <div style={{ fontWeight: 800, fontSize: 14, color: BRAND, flexShrink: 0 }}>{p}</div>
+                </div>
+              ))}
 
-            {/* Floating notifications */}
-            <div style={{ ...s.notif, top: '8%', right: '-90px' }}>
-              <span>�️</span>
-              <div>
-                <div style={s.notifTitle}>Yeni Satış!</div>
-                <div style={s.notifSub}>E-Kitap · ₺149</div>
-              </div>
-            </div>
-            <div style={{ ...s.notif, top: '42%', left: '-110px' }}>
-              <span>❤️</span>
-              <div>
-                <div style={s.notifTitle}>Yeni Takipçi</div>
-                <div style={s.notifSub}>@kullanici123</div>
-              </div>
-            </div>
-            <div style={{ ...s.notif, bottom: '10%', right: '-94px' }}>
-              <span>💰</span>
-              <div>
-                <div style={s.notifTitle}>Bugünkü Gelir</div>
-                <div style={s.notifSub}>₺1.240</div>
+              {/* View store button */}
+              <div style={{ background: BRAND, borderRadius: 14, padding: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+                <span style={{ fontWeight: 700, fontSize: 14, color: WHITE }}>Mağazayı Görüntüle</span>
+                <span style={{ color: WHITE, fontSize: 16 }}>→</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── HOW IT WORKS ── */}
-      <section style={s.howSection} id="how">
-        <p style={s.sectionEyebrow}>Nasıl Çalışır?</p>
-        <h2 style={s.sectionTitle}>3 Adımda Mağazanı Kur</h2>
-        <div style={s.steps}>
+      {/* ══════════════════════════════════════════════
+          SOCIAL PROOF – "The Best Creators Use Stan"
+      ══════════════════════════════════════════════ */}
+      <section style={{ background: WHITE, padding: '72px 40px 64px', textAlign: 'center' }}>
+        <p style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.1em', color: GRAY, textTransform: 'uppercase', marginBottom: 20 }}>
+          En İyi Creator'lar LinkFlow Kullanıyor 🚀
+        </p>
+        <h2 style={{ fontSize: 'clamp(26px,4vw,42px)', fontWeight: 900, letterSpacing: '-1.2px', color: DARK, marginBottom: 12 }}>
+          Takipçilerini Müşteriye<br />Dönüştür
+        </h2>
+        <p style={{ fontSize: 16, color: GRAY, lineHeight: 1.65, maxWidth: 420, margin: '0 auto 48px' }}>
+          10.000&apos;den fazla creator LinkFlow ile gelir elde ediyor.
+        </p>
+
+        {/* Avatar strip */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginBottom: 48, flexWrap: 'wrap' }}>
           {[
-            { n: '01', title: 'Üye Ol', desc: 'Dakikalar içinde profilini oluştur. Kredi kartı gerekmez.' },
-            { n: '02', title: 'İçeriklerini Ekle', desc: 'Linklerini, ürünlerini ve dijital içeriklerini yükle.' },
-            { n: '03', title: 'Paylaş & Kazan', desc: 'Tek linki biyografine ekle ve gelir etmeye başla.' },
-          ].map((step) => (
-            <div key={step.n} style={s.step}>
-              <div style={s.stepNum}>{step.n}</div>
-              <h3 style={s.stepTitle}>{step.title}</h3>
-              <p style={s.stepDesc}>{step.desc}</p>
+            ['#7c3aed', 'C'], ['#db2777', 'A'], ['#0ea5e9', 'M'],
+            ['#16a34a', 'T'], ['#ea580c', 'B'], ['#8b5cf6', 'Z'],
+          ].map(([bg, l], i) => (
+            <div key={i} style={{ width: 52, height: 52, borderRadius: '50%', background: String(bg), display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, fontSize: 18, color: WHITE, boxShadow: '0 4px 12px rgba(0,0,0,0.12)' }}>
+              {String(l)}
+            </div>
+          ))}
+        </div>
+
+        {/* Stats */}
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 64, flexWrap: 'wrap' }}>
+          {[['10.000+', 'Aktif Creator'], ['₺2M+', 'Toplam Gelir'], ['4.9 ★', 'Ortalama Puan']].map(([v, l]) => (
+            <div key={l} style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: 36, fontWeight: 900, color: DARK, letterSpacing: '-1.5px' }}>{v}</div>
+              <div style={{ fontSize: 14, color: GRAY, marginTop: 4 }}>{l}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── FEATURES ── */}
-      <section style={s.featSection} id="features">
-        <p style={s.sectionEyebrow}>Özellikler</p>
-        <h2 style={s.sectionTitle}>Her Şey Dahil</h2>
-        <div style={s.featGrid}>
-          {[
-            { icon: '🔗', title: 'Sınırsız Link', desc: 'Sosyal medya, web sitesi, podcast — istediğin kadar link.' },
-            { icon: '🛍️', title: 'Dijital Mağaza', desc: 'E-kitap, kurs, danışmanlık — hepsini tek yerden sat.' },
-            { icon: '📊', title: 'Detaylı Analitik', desc: 'Kim tıkladı, nereden geldi, ne sattı — hepsini gör.' },
-            { icon: '⚡', title: 'Ultra Hızlı', desc: 'Cloudflare Edge altyapısı ile küresel olarak hızlı.' },
-            { icon: '💳', title: 'Kolay Ödeme', desc: 'Kredi kartı, havale — müşteriler kolayca ödeme yapsın.' },
-            { icon: '🎨', title: 'Özelleştirilebilir', desc: 'Renk, font, düzen — sayfanı istediğin gibi tasarla.' },
-          ].map((f) => (
-            <div key={f.title} style={s.featCard}>
-              <div style={s.featIcon}>{f.icon}</div>
-              <h3 style={s.featTitle}>{f.title}</h3>
-              <p style={s.featDesc}>{f.desc}</p>
-            </div>
-          ))}
+      {/* ══════════════════════════════════════════════
+          HOW IT WORKS
+      ══════════════════════════════════════════════ */}
+      <section id="how" style={{ background: '#faf8ff', padding: '80px 40px', textAlign: 'center' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto' }}>
+          <p style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', color: BRAND, textTransform: 'uppercase', marginBottom: 10 }}>Nasıl Çalışır?</p>
+          <h2 style={{ fontSize: 'clamp(28px,4vw,44px)', fontWeight: 900, letterSpacing: '-1.5px', color: DARK, marginBottom: 48 }}>3 Adımda Başla</h2>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px,1fr))', border: `1px solid ${BORDER}`, borderRadius: 20, overflow: 'hidden' }}>
+            {[
+              { n: '01', t: 'Üye Ol', d: 'Dakikalar içinde hesabını oluştur. Kredi kartı gerekmez.' },
+              { n: '02', t: 'Sayfanı Kur', d: 'Linklerini ekle, ürünlerini yükle, görünümünü özelleştir.' },
+              { n: '03', t: 'Paylaş & Kazan', d: 'Tek linki biyografine ekle ve kazanmaya hemen başla.' },
+            ].map(({ n, t, d }, i) => (
+              <div key={n} style={{ padding: '40px 32px', background: WHITE, borderRight: i < 2 ? `1px solid ${BORDER}` : 'none', textAlign: 'left' }}>
+                <div style={{ fontSize: 44, fontWeight: 900, color: BRAND, opacity: 0.15, lineHeight: 1, marginBottom: 20 }}>{n}</div>
+                <h3 style={{ fontSize: 18, fontWeight: 700, color: DARK, marginBottom: 10 }}>{t}</h3>
+                <p style={{ fontSize: 14, lineHeight: 1.7, color: GRAY }}>{d}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── CTA BANNER ── */}
-      <section style={s.ctaBanner}>
-        <h2 style={s.ctaBannerTitle}>Takipçilerini Müşteriye Dönüştür</h2>
-        <p style={s.ctaBannerSub}>Bugün üye ol, mağazanı dakikalar içinde kur.</p>
-        <Link href="/kayit" style={s.ctaBannerBtn}>
-          Ücretsiz Başla →
+      {/* ══════════════════════════════════════════════
+          FEATURES
+      ══════════════════════════════════════════════ */}
+      <section id="features" style={{ background: WHITE, padding: '80px 40px' }}>
+        <div style={{ maxWidth: 1000, margin: '0 auto' }}>
+          <p style={{ textAlign: 'center', fontSize: 13, fontWeight: 700, letterSpacing: '0.08em', color: BRAND, textTransform: 'uppercase', marginBottom: 10 }}>Özellikler</p>
+          <h2 style={{ textAlign: 'center', fontSize: 'clamp(28px,4vw,44px)', fontWeight: 900, letterSpacing: '-1.5px', color: DARK, marginBottom: 10 }}>İhtiyacın Olan Her Şey</h2>
+          <p style={{ textAlign: 'center', fontSize: 16, color: GRAY, maxWidth: 440, margin: '0 auto 48px', lineHeight: 1.65 }}>
+            Gelir elde etmek için gereken tüm araçlar tek platformda.
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', border: `1px solid ${BORDER}`, borderRadius: 20, overflow: 'hidden' }}>
+            {[
+              { i: '🔗', t: 'Sınırsız Link', d: 'Sosyal medya, web sitesi, podcast — istediğin kadar ekle.' },
+              { i: '🛍️', t: 'Dijital Mağaza', d: 'E-kitap, kurs, danışmanlık — hepsini tek yerden sat.' },
+              { i: '📊', t: 'Canlı Analitik', d: 'Tıklanma, gelir ve ziyaretçi verilerini anlık izle.' },
+              { i: '⚡', t: 'Ultra Hızlı', d: 'Edge altyapısı ile küresel ölçekte hızlı yükleme.' },
+              { i: '💳', t: 'Güvenli Ödeme', d: 'Kredi kartı ve havale ile entegre ödeme sistemi.' },
+              { i: '🎨', t: 'Tam Özelleştirme', d: 'Renk, font, sıralama — sayfanı istediğin gibi tasarla.' },
+            ].map(({ i, t, d }, idx) => (
+              <div key={t} style={{
+                padding: '32px 28px', background: WHITE,
+                borderRight: idx % 3 !== 2 ? `1px solid ${BORDER}` : 'none',
+                borderBottom: idx < 3 ? `1px solid ${BORDER}` : 'none',
+              }}>
+                <span style={{ fontSize: 28, display: 'block', marginBottom: 16 }}>{i}</span>
+                <h3 style={{ fontSize: 16, fontWeight: 700, color: DARK, marginBottom: 8 }}>{t}</h3>
+                <p style={{ fontSize: 13, lineHeight: 1.65, color: GRAY }}>{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════
+          CTA
+      ══════════════════════════════════════════════ */}
+      <section style={{ background: BRAND, padding: '90px 40px', textAlign: 'center', color: WHITE }}>
+        <h2 style={{ fontSize: 'clamp(32px,5vw,56px)', fontWeight: 900, letterSpacing: '-2px', marginBottom: 14 }}>
+          Hemen Başla.<br />Ücretsiz.
+        </h2>
+        <p style={{ fontSize: 18, color: 'rgba(255,255,255,0.68)', marginBottom: 36, lineHeight: 1.6 }}>
+          Bugün mağazanı kur, takipçilerini müşteriye dönüştür.
+        </p>
+        <Link href="/kayit" style={{ display: 'inline-block', padding: '18px 40px', borderRadius: 50, background: GREEN, color: DARK, fontWeight: 800, fontSize: 18, textDecoration: 'none', boxShadow: '0 6px 28px rgba(0,208,132,0.35)' }}>
+          Devam Et →
         </Link>
+        <p style={{ marginTop: 14, fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>Kredi kartı gerekmez</p>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer style={s.footer}>
-        <span style={s.footerLogo}>⚡ LinkFlow</span>
-        <div style={s.footerLinks}>
-          <Link href="/gizlilik" style={s.footerLink}>Gizlilik</Link>
-          <Link href="/kullanim" style={s.footerLink}>Kullanım Şartları</Link>
-          <Link href="/iletisim" style={s.footerLink}>İletişim</Link>
+      {/* ══════════════════════════════════════════════
+          FOOTER
+      ══════════════════════════════════════════════ */}
+      <footer style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, padding: '20px 40px', borderTop: `1px solid ${BORDER}` }}>
+        <span style={{ fontSize: 16, fontWeight: 800, color: DARK, letterSpacing: '-0.4px' }}>LinkFlow</span>
+        <div style={{ display: 'flex', gap: 24 }}>
+          {[['Gizlilik', '/gizlilik'], ['Şartlar', '/sartlar'], ['Destek', '/destek'], ['İletişim', '/iletisim']].map(([l, h]) => (
+            <Link key={l} href={h} style={{ fontSize: 13, color: GRAY, textDecoration: 'none' }}>{l}</Link>
+          ))}
         </div>
-        <span style={s.footerCopy}>© 2026 LinkFlow</span>
+        <span style={{ fontSize: 13, color: '#d1d5db' }}>© 2026 LinkFlow</span>
       </footer>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; }
-        @keyframes floatPhone {
-          0%,100% { transform: translateY(0) rotate(-1.5deg); }
-          50%      { transform: translateY(-14px) rotate(-1.5deg); }
-        }
-        .phone-float { animation: floatPhone 5s ease-in-out infinite; }
-        a:hover { opacity: 0.85; }
-        #features, #how { scroll-margin-top: 70px; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+        #features, #how { scroll-margin-top: 64px; }
+        a { color: inherit; transition: opacity 0.15s; }
+        a:hover { opacity: 0.82; }
       `}</style>
     </div>
   );
 }
-
-// ── Theme ─────────────────────────────────────────────────────
-const PRIMARY = '#6B2D6B';        // koyu mor
-const PRIMARY_DARK = '#4A1F4A';
-const WHITE = '#fff';
-const DARK = '#0f0f0f';
-const GRAY = '#6b7280';
-const LIGHT_BG = '#fafafa';
-const BORDER = '#f0f0f0';
-
-const s: Record<string, React.CSSProperties> = {
-  page: { fontFamily: 'Inter, sans-serif', background: WHITE, color: DARK },
-
-  // ── Header
-  header: {
-    position: 'sticky', top: 0, zIndex: 50,
-    display: 'flex', alignItems: 'center', gap: 24,
-    padding: '14px 48px',
-    background: 'rgba(255,255,255,0.9)',
-    borderBottom: `1px solid ${BORDER}`,
-    backdropFilter: 'blur(12px)',
-  },
-  logo: {
-    display: 'flex', alignItems: 'center', gap: 10,
-    fontSize: 18, fontWeight: 800, color: DARK,
-    textDecoration: 'none', letterSpacing: '-0.4px',
-  },
-  nav: { display: 'flex', gap: 2, flex: 1 },
-  navLink: {
-    padding: '7px 14px', fontSize: 14, fontWeight: 500,
-    color: GRAY, textDecoration: 'none', borderRadius: 8,
-  },
-  navRight: { display: 'flex', gap: 8, alignItems: 'center' },
-  navLogin: {
-    padding: '8px 16px', fontSize: 14, fontWeight: 500,
-    color: DARK, textDecoration: 'none',
-  },
-  navSignup: {
-    padding: '9px 20px', fontSize: 14, fontWeight: 600,
-    color: WHITE, textDecoration: 'none', borderRadius: 8,
-    background: PRIMARY,
-  },
-
-  // ── Hero
-  hero: {
-    background: PRIMARY,
-    display: 'flex', alignItems: 'center', justifyContent: 'center',
-    flexWrap: 'wrap', gap: 48,
-    padding: '72px 64px 64px',
-    minHeight: '88vh',
-    position: 'relative', overflow: 'hidden',
-  },
-  heroLeft: { flex: '1 1 380px', maxWidth: 520, color: WHITE },
-  heroBadge: {
-    display: 'inline-block',
-    padding: '6px 14px', borderRadius: 50,
-    background: 'rgba(255,255,255,0.15)',
-    fontSize: 13, fontWeight: 600, marginBottom: 22,
-  },
-  headline: {
-    fontSize: 'clamp(38px, 5vw, 66px)',
-    fontWeight: 900, lineHeight: 1.07,
-    letterSpacing: '-2.5px', marginBottom: 20,
-  },
-  headlineEm: {
-    fontStyle: 'italic',
-    textDecoration: 'underline',
-    textDecorationColor: 'rgba(255,255,255,0.4)',
-    textDecorationThickness: '3px',
-    textUnderlineOffset: '6px',
-  },
-  heroSub: {
-    fontSize: 16, lineHeight: 1.7,
-    color: 'rgba(255,255,255,0.75)',
-    maxWidth: 420, marginBottom: 36,
-  },
-  heroCtas: { display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center', marginBottom: 36 },
-  ctaPrimary: {
-    display: 'inline-flex', alignItems: 'center',
-    padding: '14px 26px', borderRadius: 50,
-    background: WHITE, color: PRIMARY,
-    fontWeight: 700, fontSize: 15, textDecoration: 'none',
-    boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-  },
-  ctaGhost: {
-    display: 'inline-flex', alignItems: 'center',
-    padding: '14px 22px', borderRadius: 50,
-    border: '2px solid rgba(255,255,255,0.4)',
-    color: WHITE, fontWeight: 600, fontSize: 15, textDecoration: 'none',
-  },
-  heroStats: { display: 'flex', alignItems: 'center', gap: 20 },
-  stat: {
-    display: 'flex', flexDirection: 'column', gap: 2,
-    fontSize: 13, color: 'rgba(255,255,255,0.7)',
-  },
-  statDiv: { width: 1, height: 32, background: 'rgba(255,255,255,0.25)' },
-
-  // ── Phone
-  heroRight: {
-    flex: '1 1 280px', display: 'flex',
-    justifyContent: 'center', alignItems: 'center',
-    position: 'relative', minHeight: 540,
-  },
-  phoneWrap: {
-    position: 'relative',
-    animation: 'floatPhone 5s ease-in-out infinite',
-  },
-  phone: {
-    width: 270, borderRadius: 32,
-    background: '#fff',
-    boxShadow: '0 40px 100px rgba(0,0,0,0.35), 0 0 0 1.5px rgba(255,255,255,0.3)',
-    overflow: 'hidden',
-    transform: 'rotate(-1.5deg)',
-  },
-  phoneNotch: {
-    width: 90, height: 22, borderRadius: 11,
-    background: '#f3f4f6', margin: '12px auto 0',
-  },
-  phoneScreen: {
-    padding: '14px 14px 20px',
-    display: 'flex', flexDirection: 'column', gap: 8,
-  },
-
-  pProfileRow: { display: 'flex', alignItems: 'center', gap: 10 },
-  pAvatar: {
-    width: 46, height: 46, borderRadius: '50%', flexShrink: 0,
-    background: `linear-gradient(135deg, ${PRIMARY}, #c026d3)`,
-  },
-  pUsername: { fontSize: 13, fontWeight: 700, color: DARK },
-  pBio: { fontSize: 10, color: GRAY, marginTop: 2 },
-
-  pSocialRow: { display: 'flex', gap: 6, justifyContent: 'center', margin: '4px 0' },
-  pSocialIcon: {
-    width: 30, height: 30, borderRadius: '50%',
-    background: '#f3f4f6', display: 'flex', alignItems: 'center',
-    justifyContent: 'center', fontSize: 13,
-  },
-
-  pCard: {
-    display: 'flex', alignItems: 'center', gap: 10,
-    padding: '10px 12px', borderRadius: 12,
-    border: '1.5px solid #f0f0f0', background: '#fff',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
-  },
-  pCardEmoji: { fontSize: 22, flexShrink: 0 },
-  pCardInfo: { flex: 1, display: 'flex', flexDirection: 'column', gap: 2 },
-  pCardTag: {
-    fontSize: 8, fontWeight: 700, letterSpacing: '0.05em',
-    color: WHITE, padding: '2px 6px', borderRadius: 4,
-    alignSelf: 'flex-start',
-  },
-  pCardName: { fontSize: 11, fontWeight: 700, color: DARK },
-  pCardPrice: { fontSize: 11, fontWeight: 700, color: PRIMARY },
-  pCardBtn: {
-    fontSize: 11, fontWeight: 700, color: WHITE,
-    background: PRIMARY, padding: '5px 10px', borderRadius: 8,
-    flexShrink: 0,
-  },
-
-  notif: {
-    position: 'absolute',
-    display: 'flex', alignItems: 'center', gap: 10,
-    padding: '10px 14px', borderRadius: 12, fontSize: 16,
-    background: WHITE, boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
-    border: `1px solid ${BORDER}`, whiteSpace: 'nowrap',
-  },
-  notifTitle: { fontSize: 12, fontWeight: 700, color: DARK },
-  notifSub: { fontSize: 11, color: GRAY, marginTop: 1 },
-
-  // ── How it works
-  howSection: {
-    padding: '80px 48px',
-    background: LIGHT_BG,
-    textAlign: 'center',
-  },
-  steps: {
-    display: 'flex', gap: 32, flexWrap: 'wrap',
-    justifyContent: 'center', marginTop: 48,
-  },
-  step: { flex: '1 1 220px', maxWidth: 300 },
-  stepNum: {
-    fontSize: 48, fontWeight: 900, color: PRIMARY,
-    opacity: 0.15, lineHeight: 1, marginBottom: 12,
-  },
-  stepTitle: { fontSize: 18, fontWeight: 700, marginBottom: 8, color: DARK },
-  stepDesc: { fontSize: 14, lineHeight: 1.65, color: GRAY },
-
-  // ── Features
-  featSection: {
-    padding: '80px 48px',
-    maxWidth: 1080, margin: '0 auto',
-    textAlign: 'center',
-  },
-  featGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: 20, marginTop: 48, textAlign: 'left',
-  },
-  featCard: {
-    padding: '28px 24px', borderRadius: 16,
-    border: `1px solid ${BORDER}`, background: WHITE,
-  },
-  featIcon: { fontSize: 28, marginBottom: 14 },
-  featTitle: { fontSize: 16, fontWeight: 700, marginBottom: 8, color: DARK },
-  featDesc: { fontSize: 13, lineHeight: 1.65, color: GRAY },
-
-  // Section common
-  sectionEyebrow: {
-    fontSize: 13, fontWeight: 600, letterSpacing: '0.08em',
-    color: PRIMARY, textTransform: 'uppercase', marginBottom: 12,
-  },
-  sectionTitle: {
-    fontSize: 'clamp(28px, 4vw, 42px)',
-    fontWeight: 800, letterSpacing: '-1px', color: DARK,
-  },
-
-  // ── CTA Banner
-  ctaBanner: {
-    background: PRIMARY,
-    padding: '72px 48px',
-    textAlign: 'center',
-    color: WHITE,
-  },
-  ctaBannerTitle: {
-    fontSize: 'clamp(28px, 4vw, 44px)',
-    fontWeight: 900, letterSpacing: '-1.5px', marginBottom: 14,
-  },
-  ctaBannerSub: { fontSize: 16, color: 'rgba(255,255,255,0.7)', marginBottom: 32 },
-  ctaBannerBtn: {
-    display: 'inline-block',
-    padding: '15px 32px', borderRadius: 50,
-    background: WHITE, color: PRIMARY,
-    fontWeight: 700, fontSize: 16, textDecoration: 'none',
-    boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-  },
-
-  // ── Footer
-  footer: {
-    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-    flexWrap: 'wrap', gap: 12,
-    padding: '20px 48px',
-    borderTop: `1px solid ${BORDER}`,
-    background: WHITE,
-  },
-  footerLogo: { fontSize: 15, fontWeight: 700, color: DARK },
-  footerLinks: { display: 'flex', gap: 24 },
-  footerLink: { fontSize: 13, color: GRAY, textDecoration: 'none' },
-  footerCopy: { fontSize: 13, color: GRAY },
-};
